@@ -1,0 +1,25 @@
+# ITCH benchmark - synthetic 8M-message feed (seed 42)
+# machine: Apple M2 (4 perf cores), 8 GB, macOS 26.4, Apple clang 17, -O3 -march=native
+# NOTE: per-op latency is quantized to the M2 cntvct tick (~41.7 ns); run on
+#       Linux x86 (rdtsc, sub-ns) for fine-grained percentiles.
+# reproduce: ./build/gen_synthetic data/synthetic.ITCH50 8000000 42 && ./build/run_benchmark data/synthetic.ITCH50
+
+file        : data/synthetic.ITCH50 (258.6 MB)
+symbol      : AMZN (locate 4)
+tsc freq    : 0.024 GHz (calibrated)
+core pinned : no (not Linux)
+
+tracked-symbol book ops: 2002601 (warmup discard: 500650)
+
+                              baseline       optimized      speedup
+                            (std::map)    (flat array)             
+----------------------------------------------------------------------
+throughput (Mmsg/s)              18.77           33.04        1.76x
+ns / message                      53.3            30.3        1.76x
+book op p50 (us)                 0.083           0.041        2.02x
+book op p99 (us)                 0.416           0.249        1.67x
+book op p99.9 (us)               3.457           0.416        8.31x
+book op max (us)              2064.063          45.611       45.25x
+----------------------------------------------------------------------
+consistency (top-10 both sides + total qty): PASS
+latency samples: 1501951 (baseline) / 1501951 (optimized)
