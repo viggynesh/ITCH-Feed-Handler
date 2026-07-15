@@ -1,0 +1,21 @@
+# perf stat capture - TEMPLATE
+#
+# `perf` is Linux-only, so I could not capture hardware cache counters on my
+# dev machine (Apple M2 / macOS). Run this on a Linux x86 box to fill in the
+# real before/after numbers:
+#
+#   cmake -S . -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build -j
+#   ./build/gen_synthetic data/synthetic.ITCH50 8000000 42     # or use scripts/get_data.sh
+#   scripts/perf_stat.sh data/synthetic.ITCH50
+#
+# That writes results/perf_baseline_book.txt and results/perf_optimized_book.txt.
+# The numbers to lift into the README are cache-misses and the
+# cache-miss / cache-reference ratio for each build. Expected shape:
+#
+#   baseline_book  : high cache-miss rate  (tree-node + hash-bucket pointer chasing)
+#   optimized_book : much lower miss rate  (contiguous flat-array level access)
+#
+# Placeholder to overwrite with a real run:
+#
+#   baseline_book   cache-misses:  <fill in>   (<xx>% of cache-refs)
+#   optimized_book  cache-misses:  <fill in>   (<yy>% of cache-refs)
