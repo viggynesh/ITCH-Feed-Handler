@@ -1,0 +1,25 @@
+# build output
+build/
+cmake-build-*/
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+
+# ITCH sample data - never commit, these are huge and not mine to redistribute
+*.ITCH50
+*.itch50
+*.NASDAQ_ITCH50
+data/
+*.gz
+
+# benchmark scratch files
+*.bin
+perf.data*
+
+# editor / OS junk
+.vscode/
+.idea/
+.DS_Store
+compile_commands.json
